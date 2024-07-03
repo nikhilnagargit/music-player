@@ -1,14 +1,29 @@
-import sample from "../assets/sample.png";
-const Player = () => {
-  return (
-    <div className="flex flex-col gap-6 w-[35%] max-w-[550px] self-center">
-      <div className="">
-        <h2 className="text-4xl py-1 font-semibold">Blank Space</h2>
-        <p className="text-xl py-1 opacity-50 font-light">Taylow Swift</p>
-      </div>
+import { Song } from "../types";
 
-      <div className="w-full h-auto">
-        <img src={sample} alt="" className=" object-contain" />
+const Player = ({
+  activeSongId,
+  songs,
+}: {
+  activeSongId: number;
+  songs: Song[];
+}) => {
+  const activeSong = songs.filter((song: Song) => {
+    return song.id === activeSongId;
+  })[0];
+  return (
+    <div className="flex flex-col gap-6 w-[500px] self-center">
+      <div className="">
+        <h2 className="text-4xl py-1 font-semibold">{activeSong?.name}</h2>
+        <p className="text-xl py-1 opacity-50 font-light">
+          {activeSong?.artist}
+        </p>
+      </div>
+      <div className="w-full h-[520px]">
+        <img
+          src={`https://cms.samespace.com/assets/${activeSong?.cover}`}
+          alt=""
+          className="rounded-lg w-full h-full object-cover"
+        />
       </div>
 
       <div className="flex flex-col items-center gap-6 m-auto w-full">

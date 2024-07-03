@@ -8,6 +8,8 @@ interface TrackListProps {
   filteredSongs: Song[];
   searchText: string;
   setSearchText: (text: string) => void;
+  activeSongId: number;
+  setActiveSongId: (id: number) => void;
 }
 
 const TrackList = ({
@@ -16,6 +18,8 @@ const TrackList = ({
   filteredSongs,
   searchText,
   setSearchText,
+  activeSongId,
+  setActiveSongId,
 }: TrackListProps) => {
   return (
     <div className="w-[35%] max-w-[500px] flex flex-col gap-10">
@@ -46,9 +50,16 @@ const TrackList = ({
         </h2>
       </div>
       <Search searchText={searchText} setSearchText={setSearchText} />
-      <div className="flex flex-col gap-10 overflow-scroll pr-4">
-        {filteredSongs.map((song, idx) => {
-          return <SongCard key={song.id} song={song} />;
+      <div className="flex flex-col overflow-scroll">
+        {filteredSongs.map((song) => {
+          return (
+            <SongCard
+              key={song.id}
+              song={song}
+              activeSongId={activeSongId}
+              setActiveSongId={setActiveSongId}
+            />
+          );
         })}
       </div>
     </div>

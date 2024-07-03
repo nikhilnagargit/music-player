@@ -9,6 +9,7 @@ function App() {
   const [searchText, setSearchText] = useState<string>("");
   const [songs, setSongs] = useState<Song[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>("forYou");
+  const [activeSongId, setActiveSongId] = useState<number>(1);
 
   //function to filter the songs based on selected tab
   const tabFilter = (songs: Song[]) => {
@@ -50,6 +51,7 @@ function App() {
 
   // business logic and custom variables to manipulate data
   let filteredSongs;
+
   //apply tab filter
   filteredSongs = tabFilter(songs);
   //apply search filter
@@ -64,8 +66,10 @@ function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         filteredSongs={filteredSongs}
+        activeSongId={activeSongId}
+        setActiveSongId={setActiveSongId}
       />
-      <Player />
+      <Player activeSongId={activeSongId} songs={songs} />
     </div>
   );
 }

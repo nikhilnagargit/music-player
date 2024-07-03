@@ -22,15 +22,13 @@ const Player = ({
     <div
       className={`${
         openMenu ? "hidden" : "flex"
-      } lg:flex flex-col gap-6 lg:w-[500px] w-full self-center`}
+      } lg:flex flex-col gap-6 lg:w-[400px] w-full self-center`}
     >
       <div className="">
-        <h2 className="text-4xl py-1 font-semibold">{activeSong?.name}</h2>
-        <p className="text-xl py-1 opacity-50 font-light">
-          {activeSong?.artist}
-        </p>
+        <h2 className="text-3xl font-semibold">{activeSong?.name}</h2>
+        <p className="text-lg opacity-50 font-light">{activeSong?.artist}</p>
       </div>
-      <div className="w-full lg:h-[520px] h-[400px]">
+      <div className="w-full lg:h-[410px] h-[410px]">
         <img
           src={`https://cms.samespace.com/assets/${activeSong?.cover}`}
           alt=""
@@ -38,16 +36,13 @@ const Player = ({
         />
       </div>
 
-      <div className="flex flex-col items-center gap-6 m-auto w-full">
+      <div className="flex flex-col items-center gap-4 m-auto w-full">
         <div
           ref={seekBgRef}
           onClick={seekSong}
           className="bg-white/20 h-2 w-full rounded-full hover:scale-y-150 transition-transform duration-200 ease-in-out"
         >
-          <div
-            ref={seekBarRef}
-            className="bg-white z-20 h-2 rounded-full w-0"
-          ></div>
+          <div ref={seekBarRef} className="bg-white h-2 rounded-full w-0"></div>
         </div>
 
         <div className="flex w-full justify-between items-center">
@@ -57,7 +52,7 @@ const Player = ({
             width={48}
             height={48}
             fill="none"
-            className="hover:scale-125 transition-transform duration-200 ease-in-out"
+            className="hover:scale-110 transition-transform duration-200 ease-in-out"
           >
             <circle cx={24} cy={24} r={24} fill="#fff" fillOpacity={0.1} />
             <path
@@ -68,7 +63,7 @@ const Player = ({
           <div className="flex gap-4 items-center">
             {/* previous button */}
             <svg
-              className="hover:scale-125 transition-transform duration-200 ease-in-out"
+              className="hover:scale-110 transition-transform duration-200 ease-in-out"
               onClick={() => {
                 if (activeSongIdx > 0) {
                   playWithId(filteredSongs[activeSongIdx - 1].id);
@@ -93,7 +88,7 @@ const Player = ({
                 onClick={() => {
                   pause();
                 }}
-                className="hover:scale-125 transition-transform duration-200 ease-in-out"
+                className="hover:scale-110 transition-transform duration-200 ease-in-out"
                 width="48"
                 height="49"
                 viewBox="0 0 48 49"
@@ -117,7 +112,7 @@ const Player = ({
                 onClick={() => {
                   play();
                 }}
-                className="hover:scale-125 transition-transform duration-200 ease-in-out"
+                className="hover:scale-110 transition-transform duration-200 ease-in-out"
                 width="48"
                 height="49"
                 viewBox="0 0 48 49"
@@ -147,7 +142,7 @@ const Player = ({
 
             {/* next track button */}
             <svg
-              className="hover:scale-125 transition-transform duration-200 ease-in-out"
+              className="hover:scale-110 transition-transform duration-200 ease-in-out"
               onClick={() => {
                 if (activeSongIdx < filteredSongs.length - 1) {
                   playWithId(filteredSongs[activeSongIdx + 1].id);
@@ -169,7 +164,7 @@ const Player = ({
           </div>
           {/* volume button */}
           <svg
-            className="hover:scale-125 transition-transform duration-200 ease-in-out"
+            className="hover:scale-110 transition-transform duration-200 ease-in-out"
             width="48"
             height="48"
             viewBox="0 0 48 48"

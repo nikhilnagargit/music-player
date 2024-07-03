@@ -24,9 +24,9 @@ const TrackList = ({
     <div
       className={`${
         openMenu ? "flex" : "hidden"
-      } relative lg:w-[35%] w-full max-w-[500px] lg:flex flex-col lg:gap-10 gap-6 scroll-smooth`}
+      } relative lg:w-[33%] w-full max-w-[450px] lg:flex flex-col lg:gap-8 gap-6 scroll-smooth`}
     >
-      <div className="flex  gap-10 font-semibold lg:text-3xl text-xl">
+      <div className="flex  gap-8 font-semibold lg:text-3xl text-xl">
         <h2
           onClick={() => {
             setActiveTab("forYou");

@@ -68,7 +68,7 @@ function App() {
 
   return (
     <div
-      className={`h-screen lg:p-12 p-6 flex lg:flex-row flex-col lg:gap-36 gap-6 text-white tracking-wider`}
+      className={`h-screen lg:pr-24 lg:py-12 lg:justify-between p-6 flex lg:flex-row flex-col lg:gap-24 gap-6 text-white tracking-wider`}
       style={{
         background: `linear-gradient(to right,${activeSong?.accent},black)`,
       }}

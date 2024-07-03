@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./App.css";
 import Player from "./components/Player";
 import Sidebar from "./components/Sidebar";
 import TrackList from "./components/TrackList";
 import { Song, Tab } from "./types";
+import { PlayerContext } from "./context/PlayerContext";
 
 function App() {
   const [searchText, setSearchText] = useState<string>("");
   const [songs, setSongs] = useState<Song[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>("forYou");
-  const [activeSongId, setActiveSongId] = useState<number>(1);
+
+  const { audioRef, activeSongId } = useContext(PlayerContext);
 
   //function to filter the songs based on selected tab
   const tabFilter = (songs: Song[]) => {
@@ -57,8 +59,18 @@ function App() {
   //apply search filter
   filteredSongs = searchFilter(filteredSongs);
 
+  //get the data of current active song
+  const activeSong = songs.filter((song: Song) => {
+    return song.id === activeSongId;
+  })[0];
+
   return (
-    <div className=" bg-gradient-to-r from-gray-900 to-black h-screen p-12 flex gap-36 flex-row text-white tracking-wider">
+    <div
+      className={`h-screen p-12 flex gap-36 flex-row text-white tracking-wider`}
+      style={{
+        background: `linear-gradient(to right,${activeSong?.accent},black)`,
+      }}
+    >
       <Sidebar />
       <TrackList
         searchText={searchText}
@@ -66,10 +78,9 @@ function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         filteredSongs={filteredSongs}
-        activeSongId={activeSongId}
-        setActiveSongId={setActiveSongId}
       />
-      <Player activeSongId={activeSongId} songs={songs} />
+      <Player activeSong={activeSong} />
+      <audio src={activeSong?.url} ref={audioRef} preload="auto"></audio>
     </div>
   );
 }

@@ -19,7 +19,6 @@ const TrackList = ({
   searchText,
   setSearchText,
   openMenu,
-  setOpenMenu,
 }: TrackListProps) => {
   return (
     <div

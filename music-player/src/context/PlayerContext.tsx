@@ -36,31 +36,37 @@ const PlayerContextProvider = (props: any) => {
     setPlaying(true);
   };
 
-  const seekSong = async (e) => {
-    audioRef.current.currentTime =
-      (e.nativeEvent.offsetX / seekBgRef.current?.offsetWidth) *
-      audioRef.current?.duration;
+  const seekSong = async (e: any) => {
+    if (audioRef.current && seekBgRef.current) {
+      audioRef.current.currentTime =
+        (e.nativeEvent.offsetX / seekBgRef.current.offsetWidth) *
+        audioRef.current?.duration;
+    }
   };
 
   useEffect(() => {
     setTimeout(() => {
-      audioRef.current.ontimeupdate = () => {
-        seekBarRef.current.style.width =
-          Math.floor(
-            (audioRef.current.currentTime / audioRef.current.duration) * 100
-          ) + "%";
+      if (audioRef.current) {
+        audioRef.current.ontimeupdate = () => {
+          if (seekBarRef.current && audioRef.current) {
+            seekBarRef.current.style.width =
+              Math.floor(
+                (audioRef.current.currentTime / audioRef.current.duration) * 100
+              ) + "%";
 
-        setTime({
-          currentTime: {
-            second: Math.floor(audioRef.current.currentTime % 60),
-            minute: Math.floor(audioRef.current.currentTime / 60),
-          },
-          totalTime: {
-            second: Math.floor(audioRef.current.duration % 60),
-            minute: Math.floor(audioRef.current.duration / 60),
-          },
-        });
-      };
+            setTime({
+              currentTime: {
+                second: Math.floor(audioRef.current.currentTime % 60),
+                minute: Math.floor(audioRef.current.currentTime / 60),
+              },
+              totalTime: {
+                second: Math.floor(audioRef.current.duration % 60),
+                minute: Math.floor(audioRef.current.duration / 60),
+              },
+            });
+          }
+        };
+      }
     }, 1000);
   }, [audioRef]);
 

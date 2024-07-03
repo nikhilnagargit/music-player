@@ -11,17 +11,8 @@ const Player = ({
   filteredSongs: Song[];
   openMenu: boolean;
 }) => {
-  const {
-    play,
-    pause,
-    playing,
-    seekBarRef,
-    seekBgRef,
-    seekSong,
-    nextSong,
-    prevSong,
-    playWithId,
-  } = useContext(PlayerContext);
+  const { play, pause, playing, seekBarRef, seekBgRef, seekSong, playWithId } =
+    useContext(PlayerContext);
 
   const activeSongIdx = filteredSongs.findIndex((song) => {
     return song.id === activeSong.id;

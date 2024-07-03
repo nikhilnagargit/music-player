@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./App.css";
 import Player from "./components/Player";
 import Sidebar from "./components/Sidebar";

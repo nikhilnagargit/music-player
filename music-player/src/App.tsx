@@ -60,9 +60,11 @@ function App() {
   filteredSongs = searchFilter(filteredSongs);
 
   //get the data of current active song
-  const activeSong = songs.filter((song: Song) => {
+  const activeSongIdx = songs.findIndex((song: Song) => {
     return song.id === activeSongId;
-  })[0];
+  });
+
+  const activeSong = songs[activeSongIdx];
 
   return (
     <div
@@ -79,7 +81,7 @@ function App() {
         setActiveTab={setActiveTab}
         filteredSongs={filteredSongs}
       />
-      <Player activeSong={activeSong} />
+      <Player activeSong={activeSong} filteredSongs={filteredSongs} />
       <audio src={activeSong?.url} ref={audioRef} preload="auto"></audio>
     </div>
   );

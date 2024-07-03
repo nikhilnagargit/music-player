@@ -2,9 +2,28 @@ import { useContext } from "react";
 import { Song } from "../types";
 import { PlayerContext } from "../context/PlayerContext";
 
-const Player = ({ activeSong }: { activeSong: Song }) => {
-  const { play, pause, playing, seekBarRef, seekBgRef, seekSong } =
-    useContext(PlayerContext);
+const Player = ({
+  activeSong,
+  filteredSongs,
+}: {
+  activeSong: Song;
+  filteredSongs: Song[];
+}) => {
+  const {
+    play,
+    pause,
+    playing,
+    seekBarRef,
+    seekBgRef,
+    seekSong,
+    nextSong,
+    prevSong,
+    playWithId,
+  } = useContext(PlayerContext);
+
+  const activeSongIdx = filteredSongs.findIndex((song) => {
+    return song.id === activeSong.id;
+  });
 
   return (
     <div className="flex flex-col gap-6 w-[500px] self-center">
@@ -52,7 +71,11 @@ const Player = ({ activeSong }: { activeSong: Song }) => {
           <div className="flex gap-4 items-center">
             {/* previous button */}
             <svg
-              onClick={() => {}}
+              onClick={() => {
+                if (activeSongIdx > 0) {
+                  playWithId(filteredSongs[activeSongIdx - 1].id);
+                }
+              }}
               width="32"
               height="33"
               viewBox="0 0 32 33"
@@ -124,6 +147,11 @@ const Player = ({ activeSong }: { activeSong: Song }) => {
 
             {/* next track button */}
             <svg
+              onClick={() => {
+                if (activeSongIdx < filteredSongs.length - 1) {
+                  playWithId(filteredSongs[activeSongIdx + 1].id);
+                }
+              }}
               width="32"
               height="33"
               viewBox="0 0 32 33"

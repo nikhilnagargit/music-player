@@ -51,7 +51,7 @@ const Player = ({
         <div
           ref={seekBgRef}
           onClick={seekSong}
-          className="bg-white/20 h-2 w-full rounded-full"
+          className="bg-white/20 h-2 w-full rounded-full hover:scale-y-150 transition-transform duration-200 ease-in-out"
         >
           <div
             ref={seekBarRef}
@@ -66,7 +66,7 @@ const Player = ({
             width={48}
             height={48}
             fill="none"
-            className="hover:scale-120"
+            className="hover:scale-125 transition-transform duration-200 ease-in-out"
           >
             <circle cx={24} cy={24} r={24} fill="#fff" fillOpacity={0.1} />
             <path
@@ -77,6 +77,7 @@ const Player = ({
           <div className="flex gap-4 items-center">
             {/* previous button */}
             <svg
+              className="hover:scale-125 transition-transform duration-200 ease-in-out"
               onClick={() => {
                 if (activeSongIdx > 0) {
                   playWithId(filteredSongs[activeSongIdx - 1].id);
@@ -101,6 +102,7 @@ const Player = ({
                 onClick={() => {
                   pause();
                 }}
+                className="hover:scale-125 transition-transform duration-200 ease-in-out"
                 width="48"
                 height="49"
                 viewBox="0 0 48 49"
@@ -124,6 +126,7 @@ const Player = ({
                 onClick={() => {
                   play();
                 }}
+                className="hover:scale-125 transition-transform duration-200 ease-in-out"
                 width="48"
                 height="49"
                 viewBox="0 0 48 49"
@@ -153,6 +156,7 @@ const Player = ({
 
             {/* next track button */}
             <svg
+              className="hover:scale-125 transition-transform duration-200 ease-in-out"
               onClick={() => {
                 if (activeSongIdx < filteredSongs.length - 1) {
                   playWithId(filteredSongs[activeSongIdx + 1].id);
@@ -174,6 +178,7 @@ const Player = ({
           </div>
           {/* volume button */}
           <svg
+            className="hover:scale-125 transition-transform duration-200 ease-in-out"
             width="48"
             height="48"
             viewBox="0 0 48 48"

@@ -25,7 +25,7 @@ const TrackList = ({
     <div
       className={`${
         openMenu ? "flex" : "hidden"
-      } relative lg:w-[35%] w-full max-w-[500px] lg:flex flex-col lg:gap-10 gap-6`}
+      } relative lg:w-[35%] w-full max-w-[500px] lg:flex flex-col lg:gap-10 gap-6 scroll-smooth`}
     >
       <div className="flex  gap-10 font-semibold lg:text-3xl text-xl">
         <h2

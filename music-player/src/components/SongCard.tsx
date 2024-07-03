@@ -7,15 +7,7 @@ type SongCardProps = {
 };
 
 const SongCard = ({ song }: SongCardProps) => {
-  const {
-    activeSongId,
-    setActiveSongId,
-    setPlaying,
-    play,
-    pause,
-    playWithId,
-    time,
-  } = useContext(PlayerContext);
+  const { activeSongId, playWithId } = useContext(PlayerContext);
 
   const localSongRef = useRef<HTMLAudioElement>(null);
 
@@ -24,7 +16,7 @@ const SongCard = ({ song }: SongCardProps) => {
       onClick={() => {
         playWithId(song.id);
       }}
-      className={`flex lg:gap-5 gap-3 items-center cursor-pointer rounded-lg lg:p-4 p-2 ${
+      className={`flex transition-all duration-300 lg:gap-5 gap-3 items-center cursor-pointer rounded-lg lg:p-4 p-2 ${
         activeSongId === song.id ? "bg-opacity-10 bg-white" : ""
       }`}
     >
@@ -39,10 +31,12 @@ const SongCard = ({ song }: SongCardProps) => {
           {song.artist}
         </h4>
       </div>
-      <div className="lg:text-xl text-lg font-light opacity-50">
-        {Math.floor(localSongRef.current?.duration / 60)}:
-        {Math.floor(localSongRef.current?.duration % 60)}
-      </div>
+      {localSongRef.current && (
+        <div className="lg:text-xl text-lg font-light opacity-50">
+          {Math.floor(localSongRef.current?.duration / 60)}:
+          {Math.floor(localSongRef.current?.duration % 60)}
+        </div>
+      )}
       <audio src={song.url} ref={localSongRef}></audio>
     </div>
   );

@@ -1,7 +1,7 @@
 import avatar from "../assets/avatar.png";
 const Sidebar = () => {
   return (
-    <div className="w-[20%] flex flex-col justify-between h-full items-start">
+    <div className="w-[10%] flex flex-col justify-between h-full items-start">
       <svg
         className=""
         width="133"

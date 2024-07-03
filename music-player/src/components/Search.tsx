@@ -10,7 +10,7 @@ const Search = ({
       <input
         name="search"
         type="text"
-        className="block w-full p-4 text-md rounded-lg bg-white/10 placeholder:text-white/50 outline-none placeholder:text-xl placeholder:font-light"
+        className="block w-full p-4 lg:text-md text-sm rounded-lg bg-white/10 placeholder:text-white/50 outline-none placeholder:text-lg placeholder:lg:text-xl placeholder:font-light"
         placeholder="Search Song, Artist"
         value={searchText}
         onChange={(e) => {
@@ -19,6 +19,7 @@ const Search = ({
       />
       <div className="absolute cursor-pointer top-2 end-4 flex items-center">
         <svg
+          className="w-8 h-8"
           width="38"
           height="38"
           viewBox="0 0 30 30"

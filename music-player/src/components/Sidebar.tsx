@@ -1,12 +1,10 @@
 import avatar from "../assets/avatar.png";
-const Sidebar = () => {
+const Sidebar = ({ openMenu, setOpenMenu }: any) => {
   return (
-    <div className="w-[10%] flex flex-col justify-between h-full items-start">
+    <div className="lg:w-[10%] w-full flex justify-between lg:flex-col flex-row  items-center lg:items-start">
       <svg
-        className=""
-        width="133"
-        height="40"
-        viewBox="0 0 133 40"
+        className="w-24 h-10 lg:w-36 lg:h-18"
+        viewBox="0 0 140 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -15,7 +13,48 @@ const Sidebar = () => {
           fill="white"
         />
       </svg>
-      <img src={avatar} alt="avatar" className="h-16 w-16" />
+      <img
+        src={avatar}
+        alt="avatar"
+        className="lg:h-16 hidden lg:block lg:w-16 rounded-full"
+      />
+      {!openMenu ? (
+        <svg
+          onClick={() => {
+            setOpenMenu(true);
+          }}
+          className="lg:hidden w-8 h-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 6H20M4 12H20M4 18H20"
+            stroke="#ffffff"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+        </svg>
+      ) : (
+        <svg
+          onClick={() => {
+            setOpenMenu(false);
+          }}
+          fill="none"
+          className="lg:hidden w-8 h-8"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 18L18 6M6 6L18 18"
+            stroke="#ffffff"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+        </svg>
+      )}
     </div>
   );
 };

@@ -10,7 +10,7 @@ function App() {
   const [searchText, setSearchText] = useState<string>("");
   const [songs, setSongs] = useState<Song[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>("forYou");
-
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const { audioRef, activeSongId } = useContext(PlayerContext);
 
   //function to filter the songs based on selected tab
@@ -68,20 +68,27 @@ function App() {
 
   return (
     <div
-      className={`h-screen p-12 flex gap-36 flex-row text-white tracking-wider`}
+      className={`h-screen lg:p-12 p-6 flex lg:flex-row flex-col lg:gap-36 gap-6 text-white tracking-wider`}
       style={{
         background: `linear-gradient(to right,${activeSong?.accent},black)`,
       }}
     >
-      <Sidebar />
+      <Sidebar openMenu={openMenu} setOpenMenu={setOpenMenu} />
+
       <TrackList
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
         searchText={searchText}
         setSearchText={setSearchText}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         filteredSongs={filteredSongs}
       />
-      <Player activeSong={activeSong} filteredSongs={filteredSongs} />
+      <Player
+        openMenu={openMenu}
+        activeSong={activeSong}
+        filteredSongs={filteredSongs}
+      />
       <audio src={activeSong?.url} ref={audioRef} preload="auto"></audio>
     </div>
   );

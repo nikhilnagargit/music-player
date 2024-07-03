@@ -8,6 +8,8 @@ interface TrackListProps {
   filteredSongs: Song[];
   searchText: string;
   setSearchText: (text: string) => void;
+  openMenu: boolean;
+  setOpenMenu: (item: boolean) => void;
 }
 
 const TrackList = ({
@@ -16,10 +18,16 @@ const TrackList = ({
   filteredSongs,
   searchText,
   setSearchText,
+  openMenu,
+  setOpenMenu,
 }: TrackListProps) => {
   return (
-    <div className="w-[35%] max-w-[500px] flex flex-col gap-10">
-      <div className="flex  gap-10 font-semibold text-3xl">
+    <div
+      className={`${
+        openMenu ? "flex" : "hidden"
+      } relative lg:w-[35%] w-full max-w-[500px] lg:flex flex-col lg:gap-10 gap-6`}
+    >
+      <div className="flex  gap-10 font-semibold lg:text-3xl text-xl">
         <h2
           onClick={() => {
             setActiveTab("forYou");

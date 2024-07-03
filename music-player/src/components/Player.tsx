@@ -5,9 +5,11 @@ import { PlayerContext } from "../context/PlayerContext";
 const Player = ({
   activeSong,
   filteredSongs,
+  openMenu,
 }: {
   activeSong: Song;
   filteredSongs: Song[];
+  openMenu: boolean;
 }) => {
   const {
     play,
@@ -26,14 +28,18 @@ const Player = ({
   });
 
   return (
-    <div className="flex flex-col gap-6 w-[500px] self-center">
+    <div
+      className={`${
+        openMenu ? "hidden" : "flex"
+      } lg:flex flex-col gap-6 lg:w-[500px] w-full self-center`}
+    >
       <div className="">
         <h2 className="text-4xl py-1 font-semibold">{activeSong?.name}</h2>
         <p className="text-xl py-1 opacity-50 font-light">
           {activeSong?.artist}
         </p>
       </div>
-      <div className="w-full h-[520px]">
+      <div className="w-full lg:h-[520px] h-[400px]">
         <img
           src={`https://cms.samespace.com/assets/${activeSong?.cover}`}
           alt=""

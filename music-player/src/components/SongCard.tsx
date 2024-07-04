@@ -31,13 +31,15 @@ const SongCard = ({ song }: SongCardProps) => {
           {song.artist}
         </h4>
       </div>
-      {localSongRef.current && (
+      {localSongRef.current ? (
         <div className="lg:text-lg text-md font-light opacity-50">
           {Math.floor(localSongRef.current?.duration / 60)}:
           {Math.floor(localSongRef.current?.duration % 60)}
         </div>
+      ) : (
+        <div className="lg:text-lg text-md font-light opacity-50">1:47</div>
       )}
-      <audio src={song.url} ref={localSongRef}></audio>
+      <audio src={song.url} ref={localSongRef} preload="auto"></audio>
     </div>
   );
 };

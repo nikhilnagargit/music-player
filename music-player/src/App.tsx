@@ -1,69 +1,37 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./App.css";
 import Player from "./components/Player";
 import Sidebar from "./components/Sidebar";
 import TrackList from "./components/TrackList";
 import { Song, Tab } from "./types";
 import { PlayerContext } from "./context/PlayerContext";
+import useFetchSongs from "./hooks/useFetchSongs";
+import { searchFilter, tabFilter } from "./utils/helpers";
 
 function App() {
+  //getting data from custom hook
+  const { songs, isLoading } = useFetchSongs(
+    "https://cms.samespace.com/items/songs"
+  );
+
+  //managing root level states
   const [searchText, setSearchText] = useState<string>("");
-  const [songs, setSongs] = useState<Song[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>("forYou");
+  //mobile responsiveness state
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  //audio state
   const { audioRef, activeSongId } = useContext(PlayerContext);
 
-  //function to filter the songs based on selected tab
-  const tabFilter = (songs: Song[]) => {
-    const result = songs.filter((song) => {
-      if (activeTab === "forYou") {
-        return true;
-      }
-      if (activeTab === "topTracks" && song.top_track) {
-        return true;
-      }
-      return false;
-    });
-    return result;
-  };
-
-  //function to filter the songs based on search text input
-  const searchFilter = (songs: Song[]) => {
-    const result = songs.filter((song) => {
-      if (searchText === "") {
-        return true;
-      }
-      return (
-        song.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        song.artist.toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    return result;
-  };
-
-  // to fetch songs on mount
-  useEffect(() => {
-    const fetchSongs = async () => {
-      const response = await fetch(`https://cms.samespace.com/items/songs`);
-      const responseJSON = await response.json();
-      setSongs(responseJSON.data);
-    };
-    fetchSongs();
-  }, []);
-
-  // business logic and custom variables to manipulate data
   let filteredSongs;
-
   //apply tab filter
-  filteredSongs = tabFilter(songs);
+  filteredSongs = tabFilter(songs, activeTab);
   //apply search filter
-  filteredSongs = searchFilter(filteredSongs);
+  filteredSongs = searchFilter(filteredSongs, searchText);
 
-  //get the data of current active song
+  //get the index and data of current active song
   const activeSongIdx = songs.findIndex((song: Song) => {
     return song.id === activeSongId;
   });
-
   const activeSong = songs[activeSongIdx];
 
   return (
@@ -74,21 +42,26 @@ function App() {
       }}
     >
       <Sidebar openMenu={openMenu} setOpenMenu={setOpenMenu} />
-
-      <TrackList
-        openMenu={openMenu}
-        setOpenMenu={setOpenMenu}
-        searchText={searchText}
-        setSearchText={setSearchText}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        filteredSongs={filteredSongs}
-      />
-      <Player
-        openMenu={openMenu}
-        activeSong={activeSong}
-        filteredSongs={filteredSongs}
-      />
+      {isLoading ? (
+        <div className="animate-spin text-white self-center">Loading...</div>
+      ) : (
+        <>
+          <TrackList
+            openMenu={openMenu}
+            setOpenMenu={setOpenMenu}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            filteredSongs={filteredSongs}
+          />
+          <Player
+            openMenu={openMenu}
+            activeSong={activeSong}
+            filteredSongs={filteredSongs}
+          />
+        </>
+      )}
       <audio src={activeSong?.url} ref={audioRef} preload="auto"></audio>
     </div>
   );

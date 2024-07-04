@@ -3,12 +3,12 @@ import { createContext, useEffect, useRef, useState } from "react";
 export const PlayerContext = createContext<any>(null);
 
 const PlayerContextProvider = (props: any) => {
+  //setting up required states for the player component
   const audioRef = useRef<HTMLAudioElement>(null);
   const seekBgRef = useRef<HTMLDivElement>(null);
   const seekBarRef = useRef<HTMLDivElement>(null);
   const [activeSongId, setActiveSongId] = useState<number>(1);
   const [playing, setPlaying] = useState<boolean>(false);
-
   const [time, setTime] = useState<any>({
     currentTime: {
       second: 0,
@@ -20,22 +20,26 @@ const PlayerContextProvider = (props: any) => {
     },
   });
 
+  // play the current audio
   const play = () => {
     audioRef.current?.play();
     setPlaying(true);
   };
 
+  //pasue the current audio
   const pause = () => {
     audioRef.current?.pause();
     setPlaying(false);
   };
 
+  //play audio with specific id of song
   const playWithId = async (id: number) => {
     await setActiveSongId(id);
     await audioRef.current?.play();
     setPlaying(true);
   };
 
+  // change the song current time based on seek bar clicks
   const seekSong = async (e: any) => {
     if (audioRef.current && seekBgRef.current) {
       audioRef.current.currentTime =
@@ -44,8 +48,9 @@ const PlayerContextProvider = (props: any) => {
     }
   };
 
+  // update song's current time every one second
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutid = setTimeout(() => {
       if (audioRef.current) {
         audioRef.current.ontimeupdate = () => {
           if (seekBarRef.current && audioRef.current) {
@@ -68,8 +73,14 @@ const PlayerContextProvider = (props: any) => {
         };
       }
     }, 1000);
+
+    //clearing out the timer for cleanup
+    return () => {
+      clearTimeout(timeoutid);
+    };
   }, [audioRef]);
 
+  //assembling all the context state and functions
   const contextValue = {
     audioRef,
     seekBgRef,

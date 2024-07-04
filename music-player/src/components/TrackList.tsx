@@ -24,7 +24,7 @@ const TrackList = ({
     <div
       className={`${
         openMenu ? "flex" : "hidden"
-      } relative lg:w-[33%] w-full max-w-[450px] lg:flex flex-col lg:gap-8 gap-6 scroll-smooth`}
+      } relative lg:w-[33%] w-full max-w-[450px] lg:flex flex-col gap-6`}
     >
       <div className="flex  gap-8 font-semibold lg:text-3xl text-xl">
         <h2
@@ -53,7 +53,7 @@ const TrackList = ({
         </h2>
       </div>
       <Search searchText={searchText} setSearchText={setSearchText} />
-      <div className="flex flex-col overflow-scroll">
+      <div className="flex flex-col overflow-scroll scrollbar">
         {filteredSongs.map((song) => {
           return <SongCard key={song.id} song={song} />;
         })}

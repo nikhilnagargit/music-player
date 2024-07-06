@@ -16,7 +16,7 @@ const SongCard = ({ song }: SongCardProps) => {
       onClick={() => {
         playWithId(song.id);
       }}
-      className={`flex transition-all duration-200 lg:gap-5 gap-3 items-center cursor-pointer rounded-lg lg:p-3 p-2 ${
+      className={`flex transition-all duration-200 gap-3 items-center cursor-pointer rounded-lg lg:p-3 p-2 ${
         activeSongId === song.id ? "bg-opacity-10 bg-white" : ""
       }`}
     >

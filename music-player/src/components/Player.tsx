@@ -22,10 +22,10 @@ const Player = ({
     <div
       className={`${
         openMenu ? "hidden" : "flex"
-      } lg:flex flex-col gap-6 lg:w-[400px] w-full self-center lg:mr-8`}
+      } lg:flex flex-col gap-6 lg:max-w-[400px] w-full self-center lg:mr-6`}
     >
       <div className="">
-        <h2 className="text-3xl font-semibold">{activeSong?.name}</h2>
+        <h2 className="text-2xl font-semibold">{activeSong?.name}</h2>
         <p className="text-lg opacity-50 font-light">{activeSong?.artist}</p>
       </div>
       <div className="w-full lg:h-[380px] h-[380px]">

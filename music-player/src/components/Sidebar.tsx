@@ -3,7 +3,7 @@ const Sidebar = ({ openMenu, setOpenMenu }: any) => {
   return (
     <div className="lg:w-[10%] w-full flex justify-between lg:flex-col flex-row  items-center lg:items-start">
       <svg
-        className="w-24 h-10 lg:w-36 lg:h-18"
+        className="w-18 h-8 lg:w-36 lg:h-18"
         viewBox="0 0 140 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ const Sidebar = ({ openMenu, setOpenMenu }: any) => {
       <img
         src={avatar}
         alt="avatar"
-        className="lg:h-16 hidden lg:block lg:w-16 rounded-full"
+        className="lg:h-12 hidden lg:block lg:w-12 rounded-full"
       />
       {!openMenu ? (
         <svg

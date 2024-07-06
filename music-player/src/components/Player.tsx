@@ -28,7 +28,7 @@ const Player = ({
         <h2 className="text-3xl font-semibold">{activeSong?.name}</h2>
         <p className="text-lg opacity-50 font-light">{activeSong?.artist}</p>
       </div>
-      <div className="w-full lg:h-[410px] h-[410px]">
+      <div className="w-full lg:h-[380px] h-[380px]">
         <img
           src={`https://cms.samespace.com/assets/${activeSong?.cover}`}
           alt=""
